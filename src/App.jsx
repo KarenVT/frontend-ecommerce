@@ -1,16 +1,23 @@
-import Navbar from "./componets/header/Navbar"
-import Footer from "./componets/footer/Footer"
-import Inicio from "./componets/pages/Inicio"
+import Routers from "./routers/Routers";
+import Navbar from "./components/header/Navbar";
+import Footer from "./components/footer/Footer";
+import { useLocation } from "react-router-dom";
 
 function App() {
+  const location = useLocation();
+
+  // Definir las rutas donde no queremos mostrar Navbar y Footer
+  const hideElements = ["/iniciosesion", "/registro"].includes(
+    location.pathname
+  );
 
   return (
     <>
-      <Navbar />
-      <Inicio />
-      <Footer />
+      {!hideElements && <Navbar />}
+      <Routers />
+      {!hideElements && <Footer />}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
