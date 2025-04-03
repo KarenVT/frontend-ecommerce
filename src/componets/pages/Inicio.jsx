@@ -1,9 +1,13 @@
-import React from 'react'
+import Banner from "../common/Banner"
+import Underline from "../common/Underline"
 
 const Inicio = () => {
   return (
-    <div>Inicio</div>
-  )
+    <>
+      <Banner />
+      <Underline />
+    </>
+  );
 }
 
 export default Inicio
