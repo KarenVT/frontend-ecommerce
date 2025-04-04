@@ -1,3 +1,4 @@
+import Category from "../categories/Category";
 import Banner from "../common/Banner"
 import Underline from "../common/Underline"
 import Search from "../search/Search"
@@ -10,6 +11,7 @@ const Inicio = () => {
       <Underline />
       <Search />
       <Underline />
+      <Category />
     </>
   );
 }
