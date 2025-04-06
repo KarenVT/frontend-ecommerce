@@ -1,5 +1,6 @@
 import Phone from "../../assets/images/Phone.png";
 
+// Este componente es el banner principal de la página de inicio. Contiene un mensaje de bienvenida y una imagen de un teléfono.
 const Banner = () => {
   return (
     <section className="px-3 py-5 bg-hover1 lg:py-10">

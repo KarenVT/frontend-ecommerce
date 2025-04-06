@@ -4,7 +4,7 @@ import Underline from "../common/Underline"
 import Search from "../search/Search"
 import Products from "../productsList/Products"
 
-
+// 
 const Inicio = () => {
   return (
     <>

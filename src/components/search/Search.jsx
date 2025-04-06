@@ -4,6 +4,7 @@ import ButtonSearch from "./ButtonSearch"
 import InputSearch from "./InputSearch"
 import { useState } from "react"
 
+// Este componente es el que contiene el buscador de la página principal
 const Search = () => {
   const [selectedButton, setSelectedButton] = useState(null);
 
@@ -19,17 +20,18 @@ const Search = () => {
           </div>
         </div>
         <div className="flex md:flex-row flex-col  justify-center items-center gap-3.5">
+          {/* Los dos botones permiten al usuario seleccionar entre buscar por nombre o por precio. */}
           <ButtonSearch
             nombre="Nombre"
             isSelected={selectedButton === "Nombre"}
             onSelect={() => setSelectedButton("Nombre")}
-            // onSelect={}
           />
           <ButtonSearch
             nombre="Precio"
             isSelected={selectedButton === "Precio"}
             onSelect={() => setSelectedButton("Precio")}
           />
+          {/*un input para econtrar el producto. */}
           <InputSearch />
         </div>
       </div>
