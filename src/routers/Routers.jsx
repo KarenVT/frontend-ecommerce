@@ -4,6 +4,7 @@ import Contact from "../components/pages/Contact";
 import About from "../components/pages/AboutUs";
 import Login from "../components/auth/Login";
 import Register from "../components/auth/Register";
+import Payment from "../components/pages/payment";
 
 const Routers = () => {
   return (
@@ -13,6 +14,7 @@ const Routers = () => {
       <Route path="/nosotros" element={<About />} />
       <Route path="/iniciosesion" element={<Login />} />
       <Route path="/registro" element={<Register />} />
+      <Route path="/pago" element={<Payment />} />
     </Routes>
   );
 };

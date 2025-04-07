@@ -1,5 +1,6 @@
 import { BsCart4 } from "react-icons/bs";
 import { IoIosClose } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const ShoppingCart = ({ isCartOpen, setIsCartOpen }) => {
   return (
@@ -34,9 +35,11 @@ const ShoppingCart = ({ isCartOpen, setIsCartOpen }) => {
         <p className="text-lg font-semibold text-gray-800">
           Total: <span className="text-primary">$0</span>
         </p>
-        <button className="w-full bg-secondary text-white py-3 mt-3 rounded-lg font-semibold text-lg shadow-lg hover:text-secondary hover:bg-hover1 transition-all">
-          Pagar
-        </button>
+        <Link to="/pago">
+          <button className="w-full bg-secondary text-white py-3 mt-3 rounded-lg font-semibold text-lg shadow-lg hover:text-secondary hover:bg-hover1 transition-all">
+            Pagar
+          </button>
+        </Link>
       </div>
     </div>
   );
