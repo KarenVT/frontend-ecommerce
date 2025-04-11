@@ -1,0 +1,192 @@
+
+  {
+    "categories": [
+      { "id": "1", "name": "Portátil", "icon": "FaLaptop"},
+      { "id": "2", "name": "Monitor", "icon": "MdMonitor" },
+      { "id": "3", "name": "Equipo Mesa", "icon": "BsPcDisplay" },
+      { "id": "4", "name": "Celular", "icon": "FaMobileAlt" },
+      { "id": "5", "name": "Sillas", "icon": "PiOfficeChairBold" }
+  ],
+    "products": [
+      {
+        "id": 1,
+        "title": "Portátil Compumax S2043",
+        "price": 84950,
+        "image": "https://i.imgur.com/l6vQM17.png",
+        "description": "Portátil de alto rendimiento Compumax S2043 con procesador Intel Core i7, 16GB de RAM y 512GB SSD. Ideal para tareas exigentes y multitarea.",
+        "category_id": 1,
+        "stock": 10
+      },
+      {
+        "id": 2,
+        "title": "Portátil HP 14-DQ2520LA",
+        "price": 34950,
+        "image": "https://i.imgur.com/Wb542uF.png",
+        "description": "Portátil gaming Acer Nitro AN515 56AG con gráficos NVIDIA GeForce GTX 1650, 16GB de RAM y 512GB SSD. Experiencia de juego fluida y rápida.",
+        "category_id": 1,
+        "stock": 10
+      },
+      {
+        "id": 3,
+        "title": "Portátil Acer A315",
+        "price": 42000,
+        "image": "https://i.imgur.com/N5e60Xl.png",
+        "description": "Portátil Acer A315 con procesador Intel Core i5, 8GB de RAM y 256GB SSD. Perfecto para tareas diarias y entretenimiento.",
+        "category_id": 1,
+        "stock": 10
+      },
+      {
+        "id": 4,
+        "title": "Portátil Asus Vivobook E1504G",
+        "price": 32248,
+        "image": "https://i.imgur.com/cy53If0.png",
+        "description": "Portátil Asus Vivobook E1504G con procesador AMD Ryzen 5, 8GB de RAM y 256GB SSD. Diseño elegante y rendimiento eficiente.",
+        "category_id": 1,
+        "stock": 10
+      },
+      {
+        "id": 5,
+        "title": "Portátil Asus M3504Y",
+        "price": 56725,
+        "image": "https://i.imgur.com/MhVVIoM.png",
+        "description": "Portátil Asus M3504Y con pantalla Full HD de 15.6 pulgadas, 16GB de RAM y 512GB SSD. Ideal para trabajo y entretenimiento multimedia.",
+        "category_id": 1,
+        "stock": 10
+      },
+      {
+        "id": 6,
+        "title": "Portátil Asus X1504Z",
+        "price": 41475,
+        "image": "https://i.imgur.com/fm6vdTI.png",
+        "description": "Portátil Asus X1504Z con procesador Intel Core i5, 8GB de RAM y 256GB SSD. Ligero y potente para tareas cotidianas.",
+        "category_id": 1,
+        "stock": 10
+      },
+      {
+        "id": 7,
+        "title": "Monitor Samsung 27Plg Curvo",
+        "price": 17225,
+        "image": "https://i.imgur.com/swmi84y.png",
+        "description": "Monitor curvo Samsung de 27 pulgadas con resolución Full HD y tecnología FreeSync. Experiencia visual inmersiva.",
+        "category_id": 2,
+        "stock": 10
+      },
+      {
+        "id": 8,
+        "title": "Monitor Samsung 27Plg Odyssey G4",
+        "price": 34725,
+        "image": "https://i.imgur.com/1g4YHKQ.png",
+        "description": "Monitor gaming Samsung Odyssey G4 de 27 pulgadas con resolución QHD, 144Hz de tasa de refresco y 1ms de tiempo de respuesta.",
+        "category_id": 2,
+        "stock": 10
+      },
+      {
+        "id": 9,
+        "title": "Monitor Samsung 32Plg Plano",
+        "price": 21300,
+        "image": "https://i.imgur.com/1IVdChP.png",
+        "description": "Monitor Samsung de 32 pulgadas. Ideal para trabajo.",
+        "category_id": 2,
+        "stock": 10
+      },
+      {
+        "id": 10,
+        "title": "Monitor Samsung 32Plg Smart",
+        "price": 30490,
+        "image": "https://i.imgur.com/rx6cDdD.png",
+        "description": "Monitor Samsung Smart de 32 pulgadas con resolución 4K UHD y funciones inteligentes. Perfecto para entretenimiento y productividad.",
+        "category_id": 2,
+        "stock": 10
+      },
+      {
+        "id": 11,
+        "title": "Celular Samsung Galaxy A13",
+        "price": 14100,
+        "image": "https://i.imgur.com/z6G58eX.png",
+        "description": "Smartphone Samsung Galaxy A13 con pantalla de 6.5 pulgadas, cámara cuádruple de 50MP y batería de larga duración.",
+        "category_id": 4,
+        "stock": 10
+      },
+      {
+        "id": 12,
+        "title": "Celular Xiaomi Redmi 9C",
+        "price": 13375,
+        "image": "https://i.imgur.com/Ui0HAOV.png",
+        "description": "Smartphone Xiaomi Redmi 9C con pantalla de 6.53 pulgadas, cámara triple de 13MP y batería de 5000mAh. Excelente relación calidad-precio.",
+        "category_id": 4,
+        "stock": 10
+      },
+      {
+        "id": 13,
+        "title": "Celular Xiaomi Redmi Note 11",
+        "price": 13950,
+        "image": "https://i.imgur.com/WlshfbM.png",
+        "description": "Smartphone Xiaomi Redmi Note 11 con pantalla AMOLED de 6.43 pulgadas, cámara cuádruple de 50MP y batería de 5000mAh.",
+        "category_id": 4,
+        "stock": 10
+      },
+      {
+        "id": 14,
+        "title": "Silla Gamer Falcon X SD-010",
+        "price": 21000,
+        "image": "https://i.imgur.com/k5LcgMX.png",
+        "description": "Silla gamer Falcon X SD-010 con diseño ergonómico, reposabrazos ajustables y soporte lumbar. Comodidad extrema para largas sesiones de juego.",
+        "category_id": 5,
+        "stock": 10
+      },
+      {
+        "id": 15,
+        "title": "Silla Gamer GXT 703",
+        "price": 14950,
+        "image": "https://i.imgur.com/vG6ns0d.png",
+        "description": "Silla gamer GXT 703 con cojín lumbar y cervical, respaldo reclinable y base robusta. Perfecta para jugadores exigentes.",
+        "category_id": 5,
+        "stock": 10
+      },
+      {
+      "id": 16,
+      "title": "Silla Gamer GTX 716",
+      "price": 28300,
+      "image": "https://i.imgur.com/8Y3OY9M.png",
+      "description": "Silla gamer GTX 716 con soporte lumbar avanzado, reposapiés retráctil y respaldo reclinable.",
+      "category_id": 5,
+      "stock": 10
+    },
+    {
+      "id": 17,
+      "title": "Equipo Janus AX-6",
+      "price": 40125,
+      "image": "https://i.imgur.com/7EKvybQ.png",
+      "description": "Equipo de escritorio Janus AX-6 con pantalla Full HD de 21.45 pulgadas, procesador AMD Ryzen 5 y 16GB de RAM.",
+      "category_id": 3,
+      "stock": 10
+    },
+    {
+      "id": 18,
+      "title": "Equipo Janus V900",
+      "price": 85100,
+      "image": "https://i.imgur.com/MbySXfc.png",
+      "description": "Equipo de escritorio Janus V900 con procesador AMD Ryzen 7, 16GB de RAM y 512GB SDD.",
+      "category_id": 3,
+      "stock": 10
+    },
+    {
+      "id": 19,
+      "title": "Equipo Janus RD-855",
+      "price": 51975,
+      "image": "https://i.imgur.com/gOjyHoU.png",
+      "description": "Equipo de escritorio Janus RD-855 con procesador Intel Core i7, 8GB de RAM y 512GB SSD. Rendimiento excepcional para tareas exigentes.",
+      "category_id": 3,
+      "stock": 10
+    },
+    {
+      "id": 20,
+      "title": "Equipo HG 1251",
+      "price": 49500,
+      "image": "https://i.imgur.com/UtAWhr9.png",
+      "description": "Equipo de escritorio HG 1251 con pantalla de 19.5 pulgadas, procesador Intel Core i5 y 8GB de RAM.",
+      "category_id": 3,
+      "stock": 10
+    }
+    ]
+  }

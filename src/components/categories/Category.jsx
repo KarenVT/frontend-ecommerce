@@ -1,8 +1,10 @@
-import React from 'react'
+import { useState } from 'react'
 import { FaLocationArrow } from "react-icons/fa";
+import CategoriesList from './CategoriesList';
 
 // Este componente es una sección de la página de inicio que muestra una lista de categorías
 const Category = () => {
+    const [selected, setSelected] = useState(null);
   return (
     <div className="mx-auto max-w-7xl p-6">
       <div className="flex items-center gap-3 mb-8">
@@ -11,7 +13,7 @@ const Category = () => {
           Explorar por categoría
         </h2>
       </div>
-      <p>Lista de categorias</p>
+      <CategoriesList selected={selected} setSelected={setSelected} />
     </div>
   );
 };
