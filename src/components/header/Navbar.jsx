@@ -3,10 +3,12 @@ import { BsCart3 } from "react-icons/bs";
 import { CiUser } from "react-icons/ci";
 import MenuList from "./MenuList";
 import ShoppingCart from '../Cart/ShoppingCart';
+import { useCart } from '../../context/CartContext';
 
 
 const Navbar = () => {
    const [isCartOpen, setIsCartOpen] = useState(false);
+   const { getCartItemCount } = useCart();
   return (
     <header className="text-gray-600 body-font border-b-1 border-gray-200">
       <div className="container mx-auto w-full flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -22,7 +24,7 @@ const Navbar = () => {
             className="text-white flex flex-row items-center bg-secondary font-bold border-0 py-1 px-3 focus:outline-none hover:bg-hover1 rounded text-base"
           >
             <BsCart3 className="text-white w-6 h-6 mx-1" />
-            <span>(0)</span>
+            <span>({getCartItemCount()})</span>
           </button>
           <button className=" py-1">
             <CiUser className="text-black w-6 h-6" />
