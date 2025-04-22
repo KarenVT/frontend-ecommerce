@@ -4,7 +4,7 @@ import Contact from "../components/pages/Contact";
 import About from "../components/pages/AboutUs";
 import Login from "../components/auth/Login";
 import Register from "../components/auth/Register";
-import Payment from "../components/pages/payment";
+import Payment from "../components/payment/Payment";
 import Profile from "../components/pages/Profile";
 import AdminPanel from "../components/admin/AdminPanel";
 import ProtectedRoute from "../components/auth/ProtectedRoute";
