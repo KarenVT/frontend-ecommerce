@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import InputText from "../common/InputText";
 
 // Componente de registro para crear una cuenta
 const Register = () => {
@@ -53,31 +54,28 @@ const Register = () => {
         )}
 
         <form className="space-y-4" onSubmit={handleSubmit}>
-          <input
+          <InputText
             type="text"
             name="name"
             placeholder="Nombre"
             value={formData.name}
             onChange={handleChange}
-            className="w-full border-b border-gray-300 py-2 px-3 focus:outline-none"
             required
           />
-          <input
+          <InputText
             type="email"
             name="email"
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full border-b border-gray-300 py-2 px-3 focus:outline-none"
             required
           />
-          <input
+          <InputText
             type="password"
             name="password"
             placeholder="Contraseña"
             value={formData.password}
             onChange={handleChange}
-            className="w-full border-b border-gray-300 py-2 px-3 focus:outline-none"
             required
             minLength={6}
           />

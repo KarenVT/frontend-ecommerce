@@ -2,17 +2,23 @@ import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import laptop from "../../assets/images/laptop.png";
+import InputText from "../common/InputText";
 
 // Componente de inicio de sesión para acceder a la cuenta
 const Login = () => {
+  // Estado para almacenar los datos del formulario
   const [formData, setFormData] = useState({
     email: "",
     password: ""
   });
+  // Estado que almacena el error de inicio de sesión
   const [error, setError] = useState("");
+  // Navegación para redirigir al usuario
   const navigate = useNavigate();
+  // Contexto de autenticación para iniciar sesión
   const { login } = useContext(AuthContext);
 
+  // Función para manejar los cambios en el formulario
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -20,10 +26,12 @@ const Login = () => {
     });
   };
 
+  // Función para manejar el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
-    
+
+    // iniciar sesión con los datos del formulario
     try {
       login(formData.email, formData.password);
       navigate("/"); // Redirigir al inicio después del login exitoso
@@ -52,22 +60,20 @@ const Login = () => {
           )}
 
           <form className="space-y-4" onSubmit={handleSubmit}>
-            <input
+            <InputText
               type="email"
               name="email"
               placeholder="Email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full border-b border-gray-300 py-2 px-3 focus:outline-none"
               required
             />
-            <input
+            <InputText
               type="password"
               name="password"
               placeholder="Contraseña"
               value={formData.password}
               onChange={handleChange}
-              className="w-full border-b border-gray-300 py-2 px-3 focus:outline-none"
               required
             />
 

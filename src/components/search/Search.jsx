@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaLocationArrow } from "react-icons/fa"
 import ButtonSearch from "./ButtonSearch"
-import InputSearch from "./InputSearch"
+import InputSearch from "../common/InputSearch"
 import { useState } from "react"
 
 // Este componente es el que contiene el buscador de la página principal
@@ -32,7 +32,7 @@ const Search = () => {
             onSelect={() => setSelectedButton("Precio")}
           />
           {/*un input para econtrar el producto. */}
-          <InputSearch />
+          <InputSearch placeholder="Búsca un producto..." />
         </div>
       </div>
     </div>
