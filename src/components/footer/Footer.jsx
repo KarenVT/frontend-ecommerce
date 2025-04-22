@@ -1,5 +1,14 @@
 import React from 'react'
 import { FaRegCopyright } from "react-icons/fa6";
+import Images from './images';
+
+// Importar imágenes de métodos de pago
+import AmericanExpress from '../../assets/images/American express.png';
+import Discover from '../../assets/images/Discover.png';
+import Mastercard from '../../assets/images/Mastercard.png';
+import DinersClub from '../../assets/images/Diners Club.png';
+import Jcb from '../../assets/images/Jcb.png';
+import Visa from '../../assets/images/Visa.png';
 
 const Footer = () => {
   return (
@@ -11,42 +20,12 @@ const Footer = () => {
           </span>
           <p className="mt-2 px-4 py-2">Pagos seguros con</p>
           <div className="w-40 mx-auto py-2 flex flex-row gap-1.5 flex-wrap justify-center">
-            <div className="w-10 h-7 relative bg-white">
-              <img
-                className="w-10 h-7 absolute"
-                src="https://placehold.co/42x28"
-              />
-            </div>
-            <div className="w-10 h-7 relative bg-white">
-              <img
-                className="w-10 h-6 absolute"
-                src="https://placehold.co/39x25"
-              />
-            </div>
-            <div className="w-10 h-7 relative">
-              <img
-                className="w-10 h-6 absolute"
-                src="https://placehold.co/39x25"
-              />
-            </div>
-            <div className="w-10 h-7 relative bg-white">
-              <img
-                className="w-10 h-6 absolute"
-                src="https://placehold.co/39x25"
-              />
-            </div>
-            <div className="w-10 h-7 relative">
-              <img
-                className="w-10 h-7 absolute"
-                src="https://placehold.co/39x28"
-              />
-            </div>
-            <div className="w-10 h-7 relative bg-white">
-              <img
-                className="w-10 h-6 absolute"
-                src="https://placehold.co/39x25"
-              />
-            </div>
+            <Images image={AmericanExpress} />
+            <Images image={Discover} />
+            <Images image={Mastercard} />
+            <Images image={DinersClub} />
+            <Images image={Jcb} />
+            <Images image={Visa} />
           </div>
         </div>
         <div className="w-full md:w-auto flex flex-col items-center justify-center md:items-start md:text-start">
