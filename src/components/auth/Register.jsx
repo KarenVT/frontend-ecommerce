@@ -1,8 +1,37 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 // Componente de registro para crear una cuenta
 const Register = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: ""
+  });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { register } = useContext(AuthContext);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError("");
+    
+    try {
+      register(formData.name, formData.email, formData.password);
+      navigate("/"); // Redirigir al inicio después del registro exitoso
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-white">
       <h1 className="text-3xl font-bold mb-6">
@@ -17,21 +46,40 @@ const Register = () => {
           Ingrese sus datos
         </p>
 
-        <form className="space-y-4">
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            {error}
+          </div>
+        )}
+
+        <form className="space-y-4" onSubmit={handleSubmit}>
           <input
             type="text"
+            name="name"
             placeholder="Nombre"
+            value={formData.name}
+            onChange={handleChange}
             className="w-full border-b border-gray-300 py-2 px-3 focus:outline-none"
+            required
           />
           <input
             type="email"
+            name="email"
             placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
             className="w-full border-b border-gray-300 py-2 px-3 focus:outline-none"
+            required
           />
           <input
             type="password"
+            name="password"
             placeholder="Contraseña"
+            value={formData.password}
+            onChange={handleChange}
             className="w-full border-b border-gray-300 py-2 px-3 focus:outline-none"
+            required
+            minLength={6}
           />
 
           <button

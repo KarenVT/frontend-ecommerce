@@ -1,9 +1,37 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 import laptop from "../../assets/images/laptop.png";
 
 // Componente de inicio de sesión para acceder a la cuenta
 const Login = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: ""
+  });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError("");
+    
+    try {
+      login(formData.email, formData.password);
+      navigate("/"); // Redirigir al inicio después del login exitoso
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-white">
       {/* Logo */}
@@ -17,16 +45,30 @@ const Login = () => {
           <h2 className="text-2xl font-semibold mb-2">Inicia Sesión</h2>
           <p className="text-gray-500 text-sm mb-6">Ingrese sus datos</p>
 
-          <form className="space-y-4">
+          {error && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+              {error}
+            </div>
+          )}
+
+          <form className="space-y-4" onSubmit={handleSubmit}>
             <input
-              type="text"
+              type="email"
+              name="email"
               placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
               className="w-full border-b border-gray-300 py-2 px-3 focus:outline-none"
+              required
             />
             <input
               type="password"
+              name="password"
               placeholder="Contraseña"
+              value={formData.password}
+              onChange={handleChange}
               className="w-full border-b border-gray-300 py-2 px-3 focus:outline-none"
+              required
             />
 
             <p className="text-sm text-secondary hover:underline cursor-pointer text-right">
