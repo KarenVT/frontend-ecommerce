@@ -72,6 +72,22 @@ const Navbar = () => {
                     <div className="px-4 py-2 text-sm text-gray-700 border-b">
                       Hola, {user?.name}
                     </div>
+                    <Link
+                      to="/perfil"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      onClick={() => setIsUserMenuOpen(false)}
+                    >
+                      Mi perfil
+                    </Link>
+                    {user?.role === 'administrador' && (
+                      <Link
+                        to="/admin"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={() => setIsUserMenuOpen(false)}
+                      >
+                        Panel de Administración
+                      </Link>
+                    )}
                     <button
                       onClick={handleLogout}
                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
