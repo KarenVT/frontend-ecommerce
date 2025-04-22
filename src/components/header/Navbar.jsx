@@ -111,22 +111,20 @@ const Navbar = () => {
                   </>
                 ) : (
                   <>
-                    <Link
-                      to="/iniciosesion"
-                      className="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
-                      onClick={() => setIsUserMenuOpen(false)}
+                    <button
+                      onClick={() => handleAuthNavigation('/iniciosesion')}
+                      className="flex items-center w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
                     >
                       <span className="mr-3 text-secondary">→</span>
                       Iniciar sesión
-                    </Link>
-                    <Link
-                      to="/registro"
-                      className="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
-                      onClick={() => setIsUserMenuOpen(false)}
+                    </button>
+                    <button
+                      onClick={() => handleAuthNavigation('/registro')}
+                      className="flex items-center w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
                     >
                       <span className="mr-3 text-secondary">+</span>
                       Registrarse
-                    </Link>
+                    </button>
                   </>
                 )}
               </div>

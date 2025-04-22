@@ -139,9 +139,10 @@ export const AuthProvider = ({ children }) => {
     return JSON.parse(localStorage.getItem('users') || '[]');
   };
 
-  // Modificar un usuario (solo para administradores)
+  // Modificar un usuario (para administradores y para visualizadores que editen su propia cuenta)
   const updateUser = (userId, userData) => {
-    if (user?.role !== 'administrador') {
+    // Verificar si es administrador o el usuario está editando su propia cuenta
+    if (user?.role !== 'administrador' && user?.id !== userId) {
       throw new Error('No tienes permisos para modificar usuarios');
     }
     
@@ -162,21 +163,27 @@ export const AuthProvider = ({ children }) => {
     return updatedUsers.find(u => u.id === userId);
   };
 
-  // Eliminar un usuario (solo para administradores)
+  // Eliminar un usuario (para administradores y para visualizadores que eliminen su propia cuenta)
   const deleteUser = (userId) => {
-    if (user?.role !== 'administrador') {
+    // Verificar si es administrador o el usuario está eliminando su propia cuenta
+    if (user?.role !== 'administrador' && user?.id !== userId) {
       throw new Error('No tienes permisos para eliminar usuarios');
     }
     
     // No permitir eliminar al propio usuario administrador
-    if (user.id === userId) {
-      throw new Error('No puedes eliminar tu propia cuenta');
+    if (user.role === 'administrador' && user.id === userId) {
+      throw new Error('No puedes eliminar tu propia cuenta de administrador');
     }
     
     const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
     const filteredUsers = storedUsers.filter(u => u.id !== userId);
     
     localStorage.setItem('users', JSON.stringify(filteredUsers));
+    
+    // Si el usuario se está eliminando a sí mismo, cerrar sesión
+    if (user.id === userId) {
+      logout();
+    }
     
     return true;
   };

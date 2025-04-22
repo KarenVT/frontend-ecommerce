@@ -1,13 +1,19 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import InputSearch from "../common/InputSearch"
+import InputText from "../common/InputText"
 
 const AdminPanel = () => {
-  const { getUsers, updateUser, deleteUser } = useContext(AuthContext);
+  const { getUsers, updateUser, deleteUser, user } = useContext(AuthContext);
   const [users, setUsers] = useState([]);
   const [editUser, setEditUser] = useState(null);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
+  // Obtener la lista de usuarios
   useEffect(() => {
     try {
       const usersList = getUsers();
@@ -17,6 +23,7 @@ const AdminPanel = () => {
     }
   }, [getUsers]);
 
+  // Manejar la edición de un usuario
   const handleEdit = (user) => {
     setEditUser({
       ...user,
@@ -31,6 +38,7 @@ const AdminPanel = () => {
     });
   };
 
+  // Actualizar un usuario
   const handleUpdate = () => {
     setError('');
     setSuccess('');
@@ -66,129 +74,220 @@ const AdminPanel = () => {
     }
   };
 
+  // Filtrar usuarios según el término de búsqueda
+  const filteredUsers = users.filter(user => 
+    user.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    user.email.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h2 className="text-2xl font-semibold mb-6">Panel de Administración</h2>
-      
+    <div className="container  max-w-6xl px-4 py-8 mx-auto">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-800">
+            Panel de Administración
+          </h1>
+          <p className="text-gray-600 mt-1">
+            Administra los usuarios de la plataforma
+          </p>
+        </div>
+        <button
+          onClick={() => navigate("/perfil")}
+          className="mt-4 md:mt-0 px-4 py-2 bg-secondary text-white rounded-md hover:bg-opacity-90 transition flex items-center"
+        >
+          Volver a Perfil
+        </button>
+      </div>
+
       {error && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-          {error}
+        <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-r">
+          <p>{error}</p>
         </div>
       )}
-      
+
       {success && (
-        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
-          {success}
+        <div className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded-r">
+          <p>{success}</p>
         </div>
       )}
-      
-      <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-        <div className="p-4">
-          <h3 className="text-lg font-medium mb-4">Usuarios registrados</h3>
-          
-          {editUser ? (
-            <div className="bg-gray-50 p-4 rounded mb-4">
-              <h4 className="text-md font-medium mb-3">Editar Usuario</h4>
-              <div className="space-y-3">
-                <div>
-                  <label className="block text-sm text-gray-600 mb-1">Nombre</label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={editUser.name}
-                    onChange={handleEditChange}
-                    className="w-full border rounded px-3 py-2"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm text-gray-600 mb-1">Email</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={editUser.email}
-                    onChange={handleEditChange}
-                    className="w-full border rounded px-3 py-2"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm text-gray-600 mb-1">Nueva Contraseña (dejar en blanco para mantener la actual)</label>
-                  <input
-                    type="password"
-                    name="password"
-                    value={editUser.password}
-                    onChange={handleEditChange}
-                    className="w-full border rounded px-3 py-2"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm text-gray-600 mb-1">Rol</label>
-                  <select
-                    name="role"
-                    value={editUser.role}
-                    onChange={handleEditChange}
-                    className="w-full border rounded px-3 py-2"
-                  >
-                    <option value="visualizador">Visualizador</option>
-                    <option value="administrador">Administrador</option>
-                  </select>
-                </div>
-                
-                <div className="flex space-x-2 pt-2">
-                  <button
-                    onClick={handleUpdate}
-                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-                  >
-                    Guardar Cambios
-                  </button>
-                  <button
-                    onClick={() => setEditUser(null)}
-                    className="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400"
-                  >
-                    Cancelar
-                  </button>
-                </div>
+
+      <div className="bg-white shadow-xl rounded-lg overflow-hidden">
+        <div className="p-6 bg-white flex justify-between items-center">
+          <h2 className="text-xl text-secondary font-semibold">
+            Usuarios Registrados
+          </h2>
+          <div className="relative">
+            <InputSearch
+              placeholder="Buscar usuario..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+        </div>
+
+        {/* Formulario de edición */}
+        {editUser && (
+          <div className="p-6 border-b border-t border-hover1 bg-white">
+            <h3 className="text-lg font-medium mb-4">Editar Usuario</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Nombre
+                </label>
+                <InputText
+                  type="text"
+                  name="name"
+                  value={editUser.name}
+                  onChange={handleEditChange}
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Email
+                </label>
+                <InputText
+                  type="email"
+                  name="email"
+                  value={editUser.email}
+                  onChange={handleEditChange}
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Nueva Contraseña
+                </label>
+                <InputText
+                  type="password"
+                  name="password"
+                  value={editUser.password}
+                  onChange={handleEditChange}
+                  placeholder="Dejar en blanco para mantener la actual"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Rol
+                </label>
+                <select
+                  name="role"
+                  value={editUser.role}
+                  onChange={handleEditChange}
+                  className="w-full border-b border-gray-300 py-2 px-3 focus:outline-none"
+                >
+                  <option value="visualizador">Visualizador</option>
+                  <option value="administrador">Administrador</option>
+                </select>
               </div>
             </div>
-          ) : null}
-          
-          <div className="overflow-x-auto">
-            <table className="min-w-full">
-              <thead className="bg-gray-100">
+
+            <div className="mt-6 flex space-x-4">
+              <button
+                onClick={() => setEditUser(null)}
+                className="bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300 transition"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleUpdate}
+                className="bg-secondary text-white px-4 py-2 rounded-md hover:bg-opacity-90 transition"
+              >
+                Guardar Cambios
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Tabla de usuarios */}
+        <div className="overflow-x-auto">
+          {filteredUsers.length > 0 ? (
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-button1">
                 <tr>
-                  <th className="py-3 px-4 text-left">Nombre</th>
-                  <th className="py-3 px-4 text-left">Email</th>
-                  <th className="py-3 px-4 text-left">Rol</th>
-                  <th className="py-3 px-4 text-right">Acciones</th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
+                  >
+                    Usuario
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
+                  >
+                    Email
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
+                  >
+                    Rol
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-right text-xs font-medium text-white uppercase tracking-wider"
+                  >
+                    Acciones
+                  </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
-                {users.map(user => (
-                  <tr key={user.id}>
-                    <td className="py-3 px-4">{user.name}</td>
-                    <td className="py-3 px-4">{user.email}</td>
-                    <td className="py-3 px-4 capitalize">{user.role || 'visualizador'}</td>
-                    <td className="py-3 px-4 text-right">
+              <tbody className="bg-white divide-y divide-gray-200">
+                {filteredUsers.map((userItem) => (
+                  <tr key={userItem.id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="flex items-center">
+                       
+                        <div className="ml-4">
+                          <div className="text-sm font-medium text-black">
+                            {userItem.name}
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-black">
+                        {userItem.email}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span
+                        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                          userItem.role === "administrador"
+                            ? "bg-hover1 text-secondary"
+                            : "bg-hover1 text-secondary"
+                        }`}
+                      >
+                        {userItem.role}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <button
-                        onClick={() => handleEdit(user)}
-                        className="text-blue-600 hover:text-blue-800 mr-2"
+                        onClick={() => handleEdit(userItem)}
+                        className="text-emerald-600 hover:text-emerald-900 mr-4"
                       >
                         Editar
                       </button>
-                      <button
-                        onClick={() => handleDelete(user.id)}
-                        className="text-red-600 hover:text-red-800"
-                      >
-                        Eliminar
-                      </button>
+                      {userItem.id !== user.id && (
+                        <button
+                          onClick={() => handleDelete(userItem.id)}
+                          className="text-red-600 hover:text-red-900"
+                        >
+                          Eliminar
+                        </button>
+                      )}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-          </div>
+          ) : (
+            <div className="text-center py-6">
+              <p className="text-gray-500">
+                No se encontraron usuarios que coincidan con la búsqueda.
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>

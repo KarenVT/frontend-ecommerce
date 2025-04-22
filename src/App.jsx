@@ -15,11 +15,7 @@ function App() {
   // y está intentando acceder a páginas de login o registro
   useEffect(() => {
     if (isAuthenticated && ["/iniciosesion", "/registro"].includes(location.pathname)) {
-      if (user.role === "administrador") {
-        navigate("/admin");
-      } else {
-        navigate("/perfil");
-      }
+      navigate("/");
     }
   }, [isAuthenticated, location.pathname, navigate, user]);
 
