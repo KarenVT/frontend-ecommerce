@@ -1,12 +1,55 @@
-# React + Vite
+# Frontend E-commerce con React y Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es una aplicación de e-commerce desarrollada con React y Vite, que utiliza json-server para simular una API REST.
 
-Currently, two official plugins are available:
+## Requisitos previos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Node.js (versión recomendada: 18.x o superior)
+- npm (incluido con Node.js)
 
-## Expanding the ESLint configuration
+## Guía de instalación
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Clona este repositorio:
+
+   ```bash
+   git clone <url-del-repositorio>
+   cd frontend-ecommerce
+   ```
+
+2. Instala las dependencias:
+   ```bash
+   npm install
+   ```
+
+## Ejecutar el proyecto
+
+Para ejecutar el proyecto necesitarás iniciar tanto el servidor de desarrollo de Vite como json-server (base de datos simulada).
+
+1. Inicia el servidor de desarrollo:
+
+   ```bash
+   npm run dev
+   ```
+
+   Esto iniciará la aplicación en modo desarrollo, generalmente en `http://localhost:5173`.
+
+2. En otra terminal, inicia json-server para simular la API:
+   ```bash
+   npm run json-server
+   ```
+   Esto iniciará json-server en `http://localhost:3000`.
+
+## Scripts disponibles
+
+- `npm run dev` - Inicia el servidor de desarrollo
+- `npm run build` - Construye la aplicación para producción
+- `npm run json-server` - Inicia json-server para simular la API
+
+## Sistema de Roles
+
+La aplicación cuenta con un sistema de roles que permite diferentes niveles de acceso:
+
+### Administrador
+
+- **Email**: admin@email.com
+- **Contraseña**: 123456

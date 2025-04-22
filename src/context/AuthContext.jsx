@@ -7,6 +7,29 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  // Función para asegurarse de que exista el administrador por defecto
+  const ensureAdminExists = () => {
+    const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
+    
+    // Verificar si ya existe un administrador con el email predefinido
+    const adminExists = storedUsers.some(user => user.email === 'admin@email.com');
+    
+    if (!adminExists) {
+      // Crear el administrador predeterminado
+      const defaultAdmin = {
+        id: 'admin-' + Date.now(),
+        name: 'Administrador',
+        email: 'admin@email.com',
+        password: '123456',
+        role: 'administrador'
+      };
+      
+      // Añadir el administrador y guardar
+      storedUsers.push(defaultAdmin);
+      localStorage.setItem('users', JSON.stringify(storedUsers));
+    }
+  };
+
   useEffect(() => {
     // Verificar si hay un usuario en localStorage al cargar la página
     const storedUser = localStorage.getItem('user');
@@ -14,6 +37,10 @@ export const AuthProvider = ({ children }) => {
       setUser(JSON.parse(storedUser));
       setIsAuthenticated(true);
     }
+    
+    // Asegurarse de que exista el administrador predeterminado
+    ensureAdminExists();
+    
     setLoading(false);
   }, []);
 
@@ -41,12 +68,16 @@ export const AuthProvider = ({ children }) => {
       throw new Error('Este correo electrónico ya está registrado');
     }
 
+    // Todos los usuarios nuevos tendrán rol de visualizador
+    const role = "visualizador";
+
     // Crear nuevo usuario
     const newUser = {
       id: Date.now().toString(),
       name,
       email,
-      password
+      password,
+      role
     };
 
     // Guardar en el array de usuarios
@@ -54,7 +85,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('users', JSON.stringify(storedUsers));
 
     // Guardar sesión actual
-    const sessionUser = { id: newUser.id, name, email };
+    const sessionUser = { id: newUser.id, name, email, role };
     localStorage.setItem('user', JSON.stringify(sessionUser));
     
     setUser(sessionUser);
@@ -82,7 +113,8 @@ export const AuthProvider = ({ children }) => {
     const sessionUser = {
       id: foundUser.id,
       name: foundUser.name,
-      email: foundUser.email
+      email: foundUser.email,
+      role: foundUser.role || "visualizador" // Por defecto asignar visualizador si no tiene rol
     };
     
     localStorage.setItem('user', JSON.stringify(sessionUser));
@@ -99,6 +131,56 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
   };
 
+  // Obtener todos los usuarios (solo para administradores)
+  const getUsers = () => {
+    if (user?.role !== 'administrador') {
+      throw new Error('No tienes permisos para ver esta información');
+    }
+    return JSON.parse(localStorage.getItem('users') || '[]');
+  };
+
+  // Modificar un usuario (solo para administradores)
+  const updateUser = (userId, userData) => {
+    if (user?.role !== 'administrador') {
+      throw new Error('No tienes permisos para modificar usuarios');
+    }
+    
+    const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
+    const updatedUsers = storedUsers.map(u => 
+      u.id === userId ? { ...u, ...userData } : u
+    );
+    
+    localStorage.setItem('users', JSON.stringify(updatedUsers));
+    
+    // Si el usuario modificado es el actual, actualizar la sesión
+    if (user.id === userId) {
+      const updatedSessionUser = { ...user, ...userData };
+      localStorage.setItem('user', JSON.stringify(updatedSessionUser));
+      setUser(updatedSessionUser);
+    }
+    
+    return updatedUsers.find(u => u.id === userId);
+  };
+
+  // Eliminar un usuario (solo para administradores)
+  const deleteUser = (userId) => {
+    if (user?.role !== 'administrador') {
+      throw new Error('No tienes permisos para eliminar usuarios');
+    }
+    
+    // No permitir eliminar al propio usuario administrador
+    if (user.id === userId) {
+      throw new Error('No puedes eliminar tu propia cuenta');
+    }
+    
+    const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
+    const filteredUsers = storedUsers.filter(u => u.id !== userId);
+    
+    localStorage.setItem('users', JSON.stringify(filteredUsers));
+    
+    return true;
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -107,7 +189,10 @@ export const AuthProvider = ({ children }) => {
         loading,
         register,
         login,
-        logout
+        logout,
+        getUsers,
+        updateUser,
+        deleteUser
       }}
     >
       {children}
