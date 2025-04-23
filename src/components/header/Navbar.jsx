@@ -54,11 +54,13 @@ const Navbar = () => {
             <BsCart3 className="text-white w-6 h-6 mx-1" />
             <span>({getCartItemCount()})</span>
           </button>
-          
+
           {/* Menú de usuario */}
           <div className="relative" ref={userMenuRef}>
-            <button 
-              className={`flex items-center py-1 px-2 rounded-md transition-colors ${isUserMenuOpen ? 'bg-gray-100' : 'hover:bg-gray-50'}`}
+            <button
+              className={`flex items-center py-1 px-2 rounded-md transition-colors ${
+                isUserMenuOpen ? "bg-gray-100" : "hover:bg-gray-50"
+              }`}
               onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
             >
               {isAuthenticated ? (
@@ -66,18 +68,30 @@ const Navbar = () => {
                   <div className="w-8 h-8 rounded-full text-secondary flex items-center justify-center">
                     <CiUser className="w-6 h-6" />
                   </div>
-                  <span className="text-sm hidden sm:inline font-medium mr-1">{user?.name}</span>
-                  <FiChevronDown className={`transition-transform duration-200 ${isUserMenuOpen ? 'transform rotate-180' : ''}`} />
+                  <span className="text-sm hidden sm:inline font-medium mr-1">
+                    {user?.name}
+                  </span>
+                  <FiChevronDown
+                    className={`transition-transform duration-200 ${
+                      isUserMenuOpen ? "transform rotate-180" : ""
+                    }`}
+                  />
                 </>
               ) : (
                 <>
                   <CiUser className="text-gray-700 w-6 h-6" />
-                  <span className="ml-1 text-sm font-medium hidden sm:inline">Cuenta</span>
-                  <FiChevronDown className={`ml-1 transition-transform duration-200 ${isUserMenuOpen ? 'transform rotate-180' : ''}`} />
+                  <span className="ml-1 text-sm font-medium hidden sm:inline">
+                    Cuenta
+                  </span>
+                  <FiChevronDown
+                    className={`ml-1 transition-transform duration-200 ${
+                      isUserMenuOpen ? "transform rotate-180" : ""
+                    }`}
+                  />
                 </>
               )}
             </button>
-            
+
             {isUserMenuOpen && (
               <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl py-2 z-10 border border-gray-100">
                 {isAuthenticated ? (
@@ -90,7 +104,7 @@ const Navbar = () => {
                       <FiUser className="mr-3 text-secondary w-4 h-4" />
                       Mi perfil
                     </Link>
-                    {user?.role === 'administrador' && (
+                    {user?.role === "administrador" && (
                       <Link
                         to="/admin"
                         className="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
@@ -111,20 +125,22 @@ const Navbar = () => {
                   </>
                 ) : (
                   <>
-                    <button
-                      onClick={() => handleAuthNavigation('/iniciosesion')}
-                      className="flex items-center w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                    <Link
+                      to="/iniciosesion"
+                      className="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                      onClick={() => setIsUserMenuOpen(false)}
                     >
                       <span className="mr-3 text-secondary">→</span>
                       Iniciar sesión
-                    </button>
-                    <button
-                      onClick={() => handleAuthNavigation('/registro')}
-                      className="flex items-center w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                    </Link>
+                    <Link
+                      to="/registro"
+                      className="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                      onClick={() => setIsUserMenuOpen(false)}
                     >
                       <span className="mr-3 text-secondary">+</span>
                       Registrarse
-                    </button>
+                    </Link>
                   </>
                 )}
               </div>

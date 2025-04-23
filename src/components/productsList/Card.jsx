@@ -73,7 +73,7 @@ const Card = ({ product }) => {
                 -
               </button>
               <input
-                type="number"
+                type="text"
                 min={1}
                 value={quantity}
                 max={product.stock}
