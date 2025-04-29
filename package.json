@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "json-server": "json-server --watch src/db/db.json --port 3000",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "start": "node src/db/server.js"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.2",
