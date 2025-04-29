@@ -1,23 +1,19 @@
 {
-"navigationFallback": {
+  "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": [
-      "/api/*",
-      "/images/*",
-      "/css/*",
-      "/*.{png,jpg,gif,svg,js,css}"
-    ]
+    "exclude": ["/api/*", "/assets/*", "/*.{png,jpg,gif,svg,js,css}"]
   },
   "routes": [
     {
       "route": "/api/*",
-      "methods": [
-        "GET",
-        "POST",
-        "PUT",
-        "DELETE"
-      ],
+      "methods": ["GET", "POST", "PUT", "DELETE"],
       "rewrite": "/api/$1"
     }
-  ]
+  ],
+  "globalHeaders": {
+    "content-security-policy": "default-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://*.azurestaticapps.net;"
+  },
+  "mimeTypes": {
+    ".json": "application/json"
+  }
 }
