@@ -12,7 +12,7 @@
     "json-server": "json-server --watch api/db/db.json --port 3000",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "start": "node api/db/server.js"
+    "start": "node --no-warnings api/db/server.js"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.2",
